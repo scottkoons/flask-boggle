@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Boggle</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <img src="/static/boggle-logo.png" width="500px" class="img-fluid mt-5" alt="Responsive image">
+                <p class="lead">How many words can you find in 60sec?</p>
+
+                <section id="boggle">
+                    <div class="outline">
+                        <table class="board">
+
+                            <tbody>
+                                {% for row in board %}
+                                <tr>
+                                    {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="container text-left">
+                        <p>High Score:
+                            <b>{{ highscore }}</b>
+                            in {{ num_of_plays }} plays
+                        </p>
+
+                        <p>
+                            Score: <b class="score">0</b>
+                            Seconds Left: <b class="timer"></b>
+                        </p>
+
+                        <form method="POST" class="add-word">
+                            <input name="word" class="word" autofocus>
+                            <button>Enter</button>
+                        </form>
+
+                        <p class="msg">
+                            <!-- our JS will put messages here dynamically -->
+                        </p>
+
+                        <ul class="words">
+                            <!-- our JS will words here as they score -->
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/app.js"></script>
+    <script>
+        let game = new BoggleGame("boggle", 60);
+    </script>
+</body>
+
+</html>
